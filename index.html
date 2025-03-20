@@ -95,4 +95,45 @@
                 font-size: 12px; /* Réduire la taille du texte */
             }
             .subtext {
-                line-height: 1.5; /* Améliorer la lisibilité en a
+                line-height: 1.5; /* Améliorer la lisibilité en augmentant l'espacement entre les lignes */
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="https://i.imgur.com/V2IZ4wT.png" alt="Webradio Logo" class="logo">
+    <h1>📡 Webradio <span class="live-indicator">Live</span></h1>
+    <button class="play-button" id="play-button" aria-label="Play/Pause">
+        <span class="play-icon">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+        <span class="pause-icon">
+            <svg viewBox="0 0 24 24"><path d="M6 6h4v12H6zm8 0h4v12h-4z"/></svg>
+        </span>
+    </button>
+    <!-- URL modifiée pour tenter de forcer la lecture en mode aléatoire -->
+    <iframe id="spotify-embed" class="hidden-embed" 
+        src="https://open.spotify.com/embed/playlist/0CZAejshigkxjpJz1I8H3F?utm_source=generator&theme=0&random=true" 
+        width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media">
+    </iframe>
+    <div class="subtext-container">
+        <p class="subtext">Curated by <a href="https://www.linkedin.com/in/thomas-roff%C3%A9-87317415/" target="_blank">Thomas Roffé</a> — 2025</p>
+        <p class="subtext">Assembled with Chat GPT, Github and Spotify API</p>
+    </div>
+    <script>
+        let isPlaying = false;
+        const playButton = document.getElementById('play-button');
+        const iframe = document.getElementById('spotify-embed');
+
+        // Fonction pour basculer entre lecture et pause
+        playButton.addEventListener('click', function() {
+            // Si l'iframe est déjà chargé, recharge-le pour démarrer la lecture de la playlist
+            if (!isPlaying) {
+                iframe.src = iframe.src; // Recharger l'iframe pour activer la lecture
+            }
+            isPlaying = !isPlaying;
+            playButton.classList.toggle('playing', isPlaying);
+        });
+    </script>
+</body>
+</html>
