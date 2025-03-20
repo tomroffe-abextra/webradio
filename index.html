@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neva York Radio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+        .player-container {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid black;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            width: auto;
+            max-width: 500px;
+        }
+        .artwork {
+            width: 120px;
+            height: 120px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            background-size: cover;
+            background-position: center;
+        }
+        .track-info {
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .play-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .play-button svg {
+            width: 24px;
+            height: 24px;
+            fill: black;
+        }
+        h1 {
+            font-weight: 600;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .live-indicator {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 600;
+            color: red;
+            margin-left: 10px;
+            position: relative;
+        }
+        .live-indicator::before {
+            content: '●';
+            margin-right: 5px;
+            animation: blink 1s infinite alternate;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <img src="https://i.imgur.com/V2IZ4wT.png" alt="Neva York Radio Logo" class="logo">
+    <h1>📡 Webradio <span class="live-indicator" id="live-indicator">LIVE</span></h1>
+    <div class="player-container">
+        <div class="artwork" id="artwork" style="background-image: url('default_artwork.jpg');"></div>
+        <button class="play-button" id="play-button">
+            <svg id="play-icon" viewBox="0 0 24 24"><path d="M6 6h4v12H6zm8 0h4v12h-4z"/></svg> 
+        </button>
+        <div class="track-info" id="track-info">Artiste - Titre (Année)</div>
+        <audio id="radio-player" src="https://URL_DE_TON_STREAM" preload="auto" autoplay></audio>
+    </div>
+
+    <script>
+        const player = document.getElementById('radio-player');
+        const playButton = document.getElementById('play-button');
+        const playIcon = document.getElementById('play-icon');
+        const liveIndicator = document.getElementById('live-indicator');
+
+        function updateButton() {
+            if (player.paused) {
+                playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>'; // Play icon
+                liveIndicator.style.display = 'none';
+            } else {
+                playIcon.innerHTML = '<path d="M6 6h4v12H6zm8 0h4v12h-4z"/>'; // Pause icon
+                liveIndicator.style.display = 'inline-block';
+            }
+        }
+
+        playButton.addEventListener('click', function() {
+            if (player.paused) {
+                player.src = player.src; // Recharge le flux pour éviter le blocage
+                player.play().catch(error => console.log("Lecture bloquée", error));
+            } else {
+                player.pause();
+            }
+            updateButton();
+        });
+
+        // Corrige l'affichage initial du bouton (autoplay actif = pause affiché)
+        window.onload = function() {
+            updateButton();
+        };
+    </script>
+</body>
+</html>
