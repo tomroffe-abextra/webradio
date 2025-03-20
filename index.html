@@ -1,11 +1,10 @@
-<!-- Mise à jour -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neva York Radio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Webradio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <style>
         body {
@@ -13,7 +12,7 @@
             text-align: center;
             background-color: #f4f4f4;
             color: #333;
-            padding: 40px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -21,8 +20,8 @@
             height: 100vh;
         }
         .logo {
-            width: 150px;
-            margin-bottom: 20px;
+            width: 225px;
+            margin-bottom: 30px;
         }
         .player-container {
             background: white;
@@ -68,8 +67,22 @@
         h1 {
             font-weight: 600;
             font-size: 24px;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
             text-align: center;
+        }
+        .subtext {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            color: #777;
+            margin-top: 40px;
+            line-height: 1.5;
+        }
+        .subtext a {
+            color: #0000FF;
+            text-decoration: none;
+        }
+        .subtext a:hover {
+            text-decoration: underline;
         }
         .live-indicator {
             display: inline-block;
@@ -91,7 +104,7 @@
     </style>
 </head>
 <body>
-    <img src="https://i.imgur.com/V2IZ4wT.png" alt="Neva York Radio Logo" class="logo">
+    <img src="https://i.imgur.com/V2IZ4wT.png" alt="Webradio Logo" class="logo">
     <h1>📡 Webradio <span class="live-indicator" id="live-indicator">LIVE</span></h1>
     <div class="player-container">
         <div class="artwork" id="artwork" style="background-image: url('default_artwork.jpg');"></div>
@@ -101,7 +114,7 @@
         <div class="track-info" id="track-info">Artiste - Titre (Année)</div>
         <audio id="radio-player" src="https://URL_DE_TON_STREAM" preload="auto" autoplay></audio>
     </div>
-
+    <p class="subtext">Curated by <a href="https://www.linkedin.com/in/thomas-roff%C3%A9-87317415/" target="_blank">Thomas Roffé</a> — 2025.<br>Assembled with Chat GPT, Github and Spotify API</p>
     <script>
         const player = document.getElementById('radio-player');
         const playButton = document.getElementById('play-button');
